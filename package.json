@@ -21,7 +21,6 @@
     "got": "^11.8.3",
     "howler": "^2.2.3",
     "libsodium-wrappers": "^0.7.9",
-    "node-internet-radio": "^0.2.1",
     "play-dl": "^1.4.4",
     "wokcommands": "^1.5.3",
     "xml-js": "^1.6.11"
