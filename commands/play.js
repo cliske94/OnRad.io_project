@@ -58,7 +58,8 @@ module.exports = {
 async function request(searchOptions, args, connection, audioPlayer) {
   let uri = null;
   if (args.length == 0) {
-    return "Use /play -a to search for an artist";
+    uri =
+      "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=4730628431";
   }
   if (searchOptions && args[0] == "-a") {
     uri = "http://api.dar.fm/reco2.php?artist="
@@ -131,16 +132,85 @@ async function request(searchOptions, args, connection, audioPlayer) {
     audioPlayer.musicStream.play(createAudioResource(player.stream));
     audioPlayer.musicStream.unpause();
     return "Playing";
-  } else if (args[0] == "country") {
-    uri =
-      "http://api.dar.fm/topsongs.php?q=Country&intl=1&page_size=5&partner_token=4730628431";
-  } else if (args[0] == "rock") {
-    uri =
-      "http://api.dar.fm/topsongs.php?q=Rock&intl=1&page_size=5&partner_token=4730628431";
+  } else if (args.length > 0) {
+    let genre = "music";
+    switch (args[0].toUpperCase()) {
+      case "ROCK":
+      case "ELECTRONICDUBSTEP":
+      case "COUNTRY":
+      case "HIP":
+      case "HIP-HOP":
+      case "70'S":
+      case "80'S":
+      case "CHRISTMAS":
+      case "ALTERNATIVE":
+      case "CLASSICAL":
+      case "CHILL":
+      case "INDIAN":
+      case "TRANCE":
+      case "JAZZ":
+      case "LATIN":
+      case "RAP":
+      case "OLDIES":
+      case "REGGAE":
+      case "ROOTS":
+      case "SOUL":
+      case "WORLD":
+        genre = args[0];
+        break;
+      case "MUSIC":
+      case "ANY":
+      case "ANYTHING":
+      case "ALL":
+        genre = "Music";
+        break;
+      case "HARD ROCK":
+      case "HEAVY METAL":
+      case "METAL":
+        genre = "Metal";
+        break;
+      case "HITS":
+      case "HIT MUSIC":
+      case "BEST":
+        genre = "Best Hits";
+        break;
+      case "70S":
+        genre = "70's";
+        break;
+      case "80S":
+        genre = "80's";
+        break;
+      case "90'S":
+      case "90S":
+        genre = "90's";
+        break;
+      case "2000S":
+      case "00S":
+      case "00'S":
+        genre = "00'S";
+        break;
+      case "CONTEMPORARY":
+      case "ADULT CONTEMPORARY":
+        genre = "Adult Contemporary";
+        break;
+      case "DUBSTEP":
+      case "TECHNO":
+      case "TRANCE":
+      case "ELECTRONIC":
+        genre = "Electronic";
+        break;
+      default:
+        return "Not a valid genre!";
+    }
+    uri = "http://api.dar.fm/topsongs.php?q="
+      .concat(genre)
+      .concat("&intl=1&page_size=5&partner_token=4730628431");
   } else {
     // uri = "api.dar.fm/reco2.php?artist="
     //   .concat(args[0])
     //   .concat("&partner_token=4730628431");
+    uri =
+      "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=4730628431";
   }
 
   // let uri =
@@ -173,7 +243,7 @@ async function request(searchOptions, args, connection, audioPlayer) {
     //console.log(error);
     return "Search failed!";
   } finally {
-    if (!dataJson.songs)
+    if (!dataJson.songs || !dataJson.songs.song)
       return "Not on the radio at the moment, try something else!";
     return "Playing "
       .concat(dataJson.songs.song[0].songtitle._text.trim())
