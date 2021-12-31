@@ -9,11 +9,6 @@ const convert = require("xml-js");
 const play = require("play-dl");
 const got = require("got");
 const fs = require("fs");
-var audioPlayer = {
-  musicStream: createAudioPlayer(),
-  connection: null,
-  connectionId: null,
-};
 
 module.exports = {
   category: "music",
@@ -21,7 +16,6 @@ module.exports = {
 
   maxArgs: 5,
   slash: "both",
-  //testOnly: true,
 
   callback: ({ message, interaction, args }) => {
     let searchOptions = args[0];
@@ -50,14 +44,14 @@ module.exports = {
             guildId: interaction.guild?.id,
             adapterCreator: interaction.guild?.voiceAdapterCreator,
           }).subscribe(audioPlayer.musicStream);
-          //console.log(interaction.guild.id);
           return request(searchOptions, args, connection, audioPlayer);
         } else if (message) {
+          const audioPlayer = createAudioPlayer();
           const connection = joinVoiceChannel({
             channelId: message.member.voice.channel?.id,
             guildId: message.guild?.id,
             adapterCreator: message.guild?.voiceAdapterCreator,
-          }).subscribe(audioPlayer.musicStream);
+          }).subscribe(audioPlayer);
           return request(searchOptions, args, connection, audioPlayer);
         } else return "Failed to play!";
     }
@@ -78,8 +72,8 @@ async function request(searchOptions, args, connection, audioPlayer) {
     uri = "http://stream.dar.fm/".concat(args[1]);
     let audioStream = got.stream(uri);
     let sResource = createAudioResource(audioStream);
-    audioPlayer.musicStream.play(sResource);
-    audioPlayer.musicStream.unpause();
+    audioPlayer.play(sResource);
+    audioPlayer.unpause();
     return "Playing";
   } else if (searchOptions && args[0] == "-t") {
     uri = "http://api.dar.fm/playlist.php?q="
@@ -112,18 +106,9 @@ async function request(searchOptions, args, connection, audioPlayer) {
           "http://stream.dar.fm/".concat(getByStationId)
         );
         let tResource = createAudioResource(audioStream);
-        audioPlayer.musicStream.play(tResource);
-        audioPlayer.musicStream.unpause();
+        audioPlayer.play(tResource);
+        audioPlayer.unpause();
         return "Playing";
-        // await axios({
-        //   method: "get",
-        //   url: "https://www.dar.fm/uberstationurl.php?station_id="
-        //     .concat(getByStationId)
-        //     .concat("&partner_token=123456789"),
-        // }).then(() => {
-        //   //console.log(response);
-
-        // });
       });
     } catch (error) {
       console.log(error);
@@ -138,8 +123,8 @@ async function request(searchOptions, args, connection, audioPlayer) {
   } else if (args.includes("youtube")) {
     uri = args[1];
     let player = await play.stream(uri);
-    audioPlayer.musicStream.play(createAudioResource(player.stream));
-    audioPlayer.musicStream.unpause();
+    audioPlayer.play(createAudioResource(player.stream));
+    audioPlayer.unpause();
     return "Playing";
   } else if (args.length > 0) {
     let genre = "music";
@@ -215,15 +200,10 @@ async function request(searchOptions, args, connection, audioPlayer) {
       .concat(genre)
       .concat("&intl=1&page_size=5&partner_token=4730628431");
   } else {
-    // uri = "api.dar.fm/reco2.php?artist="
-    //   .concat(args[0])
-    //   .concat("&partner_token=4730628431");
     uri =
       "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=4730628431";
   }
 
-  // let uri =
-  //"http://api.dar.fm/topsongs.php?q=Country&intl=1&page_size=5&partner_token=4730628431";
   let dataJson = { placeholder: null };
   try {
     await axios({
@@ -244,8 +224,8 @@ async function request(searchOptions, args, connection, audioPlayer) {
       //console.log(player.stream + "\nEND\n");
       //console.log(connection + "\nEND\n");
       resource = createAudioResource(audioStream);
-      audioPlayer.musicStream.play(resource);
-      audioPlayer.musicStream.unpause();
+      audioPlayer.play(resource);
+      audioPlayer.unpause();
       //console.log(audioStream);
     });
   } catch (error) {

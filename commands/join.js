@@ -5,10 +5,8 @@ module.exports = {
   description: "Joins to voice channel",
 
   slash: "both",
-  //testOnly: true,
 
   callback: ({ message, interaction }) => {
-    // console.log(interaction.member);
     if (
       (interaction && !interaction.member.voice.channel) ||
       (message != undefined && !message.member.voice.channel)

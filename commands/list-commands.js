@@ -3,7 +3,6 @@ module.exports = {
   description: "Lists commands and descriptions",
 
   slash: "both",
-  //testOnly: true,
 
   callback: ({ message, interaction }) => {
     let descriptions = [
@@ -14,9 +13,9 @@ module.exports = {
         .concat("default action is to seed by genre\n"),
       " | Pauses the current music stream\n",
       " | Stops the current music stream and disconnects the bot\n",
-      " | Can be used with the -a, -t, and -s flags\n"
+      " | Can be used with the -a and -s flags\n"
         .concat("-a searches by artist name\n")
-        .concat("-t searches for a particular track name\n ")
+        //.concat("-t searches for a particular track name\n ")
         .concat("-s shows what is playing on a station\n"),
       " | Joins the bot to a voice channel\n",
       " | Disconnects the bot from a voice channel\n",
