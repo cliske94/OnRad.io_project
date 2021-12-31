@@ -1,10 +1,19 @@
-const { joinVoiceChannel, createAudioResource } = require("@discordjs/voice");
+const {
+  createAudioPlayer,
+  joinVoiceChannel,
+  createAudioResource,
+} = require("@discordjs/voice");
+
 const axios = require("axios");
 const convert = require("xml-js");
 const play = require("play-dl");
 const got = require("got");
 const fs = require("fs");
-var audioPlayer = require("../utils/player");
+var audioPlayer = {
+  musicStream: createAudioPlayer(),
+  connection: null,
+  connectionId: null,
+};
 
 module.exports = {
   category: "music",
