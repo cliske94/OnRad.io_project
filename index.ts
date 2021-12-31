@@ -22,7 +22,7 @@ client.on("ready", () => {
 
   new WOKCommands(client, {
     commandDir: path.join(__dirname, "commands"),
-    testServers: ["908530632655790090", "916717307848446033"],
+    //testServers: ["908530632655790090", "916717307848446033"],
   });
   console.log("The bot is ready");
 });
