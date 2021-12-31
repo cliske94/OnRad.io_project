@@ -4,8 +4,7 @@ module.exports = {
   category: "Music",
   description: "Pauses stream",
 
-  slash: "both",
-  //testOnly: true,
+  //slash: "both",
 
   callback: ({}) => {
     audioPlayer.musicStream.pause();

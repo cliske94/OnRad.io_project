@@ -8,7 +8,6 @@ module.exports = {
   maxArgs: 5,
 
   slash: "both",
-  //testOnly: true,
 
   callback: async ({ message, args }) => {
     let returnString = "Not playing right now!";
