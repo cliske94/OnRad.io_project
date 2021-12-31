@@ -5,7 +5,7 @@ module.exports = {
   description: "Joins to voice channel",
 
   slash: "both",
-  testOnly: true,
+  //testOnly: true,
 
   callback: ({ message, interaction }) => {
     // console.log(interaction.member);
