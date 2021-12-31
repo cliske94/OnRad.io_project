@@ -21,7 +21,7 @@ module.exports = {
 
   maxArgs: 5,
   slash: "both",
-  testOnly: true,
+  //testOnly: true,
 
   callback: ({ message, interaction, args }) => {
     let searchOptions = args[0];

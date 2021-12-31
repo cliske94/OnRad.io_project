@@ -5,7 +5,7 @@ module.exports = {
   description: "Disconnects bot from voice channel",
 
   slash: "both",
-  testOnly: true,
+  //testOnly: true,
 
   callback: ({ message, interaction }) => {
     let gid = null;

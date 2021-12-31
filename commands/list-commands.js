@@ -3,7 +3,7 @@ module.exports = {
   description: "Lists commands and descriptions",
 
   slash: "both",
-  testOnly: true,
+  //testOnly: true,
 
   callback: ({ message, interaction }) => {
     let descriptions = [

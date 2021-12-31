@@ -5,7 +5,7 @@ module.exports = {
   description: "Stops voice connection and music stream",
 
   slash: "both",
-  testOnly: true,
+  //testOnly: true,
 
   callback: ({ message, interaction }) => {
     let gid = null;
