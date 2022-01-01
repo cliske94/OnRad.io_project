@@ -10,7 +10,8 @@ module.exports = {
         .concat("-a seeds the player with an artist name\n")
         .concat("-t seeds the player with a track, artist name, or both\n")
         .concat("-s immediately plays the station id requested\n")
-        .concat("default action is to seed by genre\n"),
+        .concat("default action is to seed by genre\n")
+        .concat("Can also be used with a genre name instead of a flag"),
       " | Pauses the current music stream\n",
       " | Stops the current music stream and disconnects the bot\n",
       " | Can be used with the -a and -s flags\n"
