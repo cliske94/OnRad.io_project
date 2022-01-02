@@ -19,9 +19,6 @@ module.exports = {
   callback: ({ message, interaction, args }) => {
     let searchOptions = args[0];
     switch (searchOptions) {
-      case "stop":
-        audioPlayer.musicStream.pause();
-        break;
       case "-s":
       case "-a":
       case "-t":
@@ -125,7 +122,7 @@ async function request(searchOptions, args, connection, audioPlayer) {
     audioPlayer.play(createAudioResource(player.stream));
     audioPlayer.unpause();
     return "Playing";
-  } else if (args.length > 0) {
+  } else if (args.length > 0 && args[0] != "-a") {
     let genre = "music";
     switch (args[0].toUpperCase()) {
       case "ROCK":
