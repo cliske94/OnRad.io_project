@@ -15,7 +15,6 @@ module.exports = {
   description: "Joins to voice channel and plays a file",
 
   maxArgs: 5,
-  slash: "both",
 
   callback: ({ message, interaction, args }) => {
     let searchOptions = args[0];

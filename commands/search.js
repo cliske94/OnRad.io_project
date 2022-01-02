@@ -6,8 +6,7 @@ module.exports = {
   description: "Searches based on flags provided",
 
   maxArgs: 5,
-
-  slash: "both",
+  minArgs: 1,
 
   callback: async ({ message, args }) => {
     let returnString = "Not playing right now!";
