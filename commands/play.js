@@ -195,7 +195,7 @@ async function request(searchOptions, args, connection, audioPlayer) {
     uri = "http://api.dar.fm/topsongs.php?q="
       .concat(genre)
       .concat("&intl=1&page_size=5&partner_token=4730628431");
-  } else {
+  } else if (args[0] != "-a") {
     uri =
       "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=4730628431";
   }
