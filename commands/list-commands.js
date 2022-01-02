@@ -10,8 +10,8 @@ module.exports = {
         .concat("-a seeds the player with an artist name\n")
         .concat("-t seeds the player with a track, artist name, or both\n")
         .concat("-s immediately plays the station id requested\n")
-        .concat("default action is to seed by genre\n"),
-      " | Pauses the current music stream\n",
+        .concat("default action is to seed by genre\n")
+        .concat("Can also be used with a genre name instead of a flag"),
       " | Stops the current music stream and disconnects the bot\n",
       " | Can be used with the -a and -s flags\n"
         .concat("-a searches by artist name\n")
@@ -22,15 +22,13 @@ module.exports = {
     ];
     return "`Play`\n"
       .concat(descriptions[0])
-      .concat("`Pause`\n")
-      .concat(descriptions[1])
       .concat("`Stop`\n")
-      .concat(descriptions[2])
+      .concat(descriptions[1])
       .concat("`Search`\n")
-      .concat(descriptions[3])
+      .concat(descriptions[2])
       .concat("`Join`\n")
-      .concat(descriptions[4])
+      .concat(descriptions[3])
       .concat("`Unjoin`\n")
-      .concat(descriptions[5]);
+      .concat(descriptions[4]);
   },
 };
