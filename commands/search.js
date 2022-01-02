@@ -8,7 +8,7 @@ module.exports = {
   maxArgs: 5,
   minArgs: 1,
 
-  callback: async ({ message, args }) => {
+  callback: async ({ interaction, args }) => {
     if (interaction != undefined)
       return "Please use the ! prefix, i.e. !search";
     let returnString = "Not playing right now!";
