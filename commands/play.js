@@ -35,12 +35,7 @@ module.exports = {
         )
           return "Please connect to a voice channel!";
         else if (interaction) {
-          const connection = joinVoiceChannel({
-            channelId: interaction.member.voice.channel?.id,
-            guildId: interaction.guild?.id,
-            adapterCreator: interaction.guild?.voiceAdapterCreator,
-          }).subscribe(audioPlayer.musicStream);
-          return request(searchOptions, args, connection, audioPlayer);
+          return "Please use the ! prefix, i.e. !play";
         } else if (message) {
           const audioPlayer = createAudioPlayer();
           const connection = joinVoiceChannel({

@@ -4,6 +4,8 @@ module.exports = {
   category: "voice",
   description: "Joins to voice channel",
 
+  slash: "both",
+
   callback: ({ message, interaction }) => {
     if (
       (interaction && !interaction.member.voice.channel) ||
