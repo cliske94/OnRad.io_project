@@ -13,7 +13,7 @@ module.exports = {
   category: "Music",
   description: "Joins to current voice channel and plays a file",
 
-  maxArgs: 5,
+  maxArgs: 7,
 
   callback: ({ message, interaction, args }) => {
     let searchOptions = args[0];
@@ -60,7 +60,12 @@ async function request(searchOptions, args, audioPlayer) {
     uri = "http://api.dar.fm/reco2.php?artist="
       .concat(searchOptions)
       .concat("&partner_token=4730628431");
-  } else if (searchOptions && args[0] == "-s" && !isNaN(args[1])) {
+  } else if (
+    searchOptions &&
+    args[0] == "-s" &&
+    !isNaN(args[1]) &&
+    args[1].length <= 6
+  ) {
     // Seeds player by station ID
     uri = "http://stream.dar.fm/".concat(args[1]);
     let audioStream = got.stream(uri);
