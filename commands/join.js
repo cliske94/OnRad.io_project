@@ -1,7 +1,7 @@
 const { joinVoiceChannel } = require("@discordjs/voice");
 
 module.exports = {
-  category: "voice",
+  category: "Voice",
   description: "Joins to voice channel",
 
   slash: "both",
