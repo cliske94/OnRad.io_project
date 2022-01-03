@@ -30,5 +30,5 @@ The join and unjoin commands join or unjoin the bot to or from a current voice c
 You can use !stop or /stop to quickly stop the current music steam. This also disconnects the bot from the voice channel.
 
 Credits:
-Michael Rober and his team for developing the OnRadio.io API
+Michael Rober and his team for developing the OnRadio.io API and 
 Alexzander Flores for development of the WOKCommands package
