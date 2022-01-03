@@ -1,17 +1,19 @@
 {
   "name": "groovy_radio",
-  "version": "1.0.0",
-  "description": "near-demand music service for discord",
+  "version": "1.0.3",
+  "description": "near-demand music service for discord using online radio",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node index.ts"
+    "dev": "ts-node index.ts",
+    "prod": "ts-node index.ts"
   },
   "author": "ATG",
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
     "@discordjs/voice": "^0.7.5",
+    "ansi-regex": ">=5.0.1",
     "avconv": "^3.1.0",
     "axios": "^0.24.0",
     "discord.js": "^13.3.1",
