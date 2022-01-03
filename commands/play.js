@@ -10,8 +10,8 @@ const play = require("play-dl");
 const got = require("got");
 
 module.exports = {
-  category: "music",
-  description: "Joins to voice channel and plays a file",
+  category: "Music",
+  description: "Joins to current voice channel and plays a file",
 
   maxArgs: 5,
 
@@ -26,7 +26,6 @@ module.exports = {
           searchOptions = searchOptions.concat(value).concat(" ");
         });
         searchOptions = searchOptions.substring(3);
-      //console.log(searchOptions);
       default:
         if (
           (interaction != undefined && !interaction.member.voice.channel) ||
@@ -34,6 +33,8 @@ module.exports = {
         )
           return "Please connect to a voice channel!";
         else if (interaction) {
+          // Only supports legacy prefix at the moment
+
           return "Please use the ! prefix, i.e. !play";
         } else if (message) {
           const audioPlayer = createAudioPlayer();
@@ -42,23 +43,25 @@ module.exports = {
             guildId: message.guild?.id,
             adapterCreator: message.guild?.voiceAdapterCreator,
           }).subscribe(audioPlayer);
-          return request(searchOptions, args, connection, audioPlayer);
-        } else return "Failed to play!";
+          return request(searchOptions, args, audioPlayer);
+        } else return "Failed to play!"; // Catch all error handling
     }
   },
 };
 
-async function request(searchOptions, args, connection, audioPlayer) {
+async function request(searchOptions, args, audioPlayer) {
   let uri = null;
   if (args.length == 0) {
     uri =
       "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=4730628431";
   }
   if (searchOptions && args[0] == "-a") {
+    // Seeds player by artist name
     uri = "http://api.dar.fm/reco2.php?artist="
       .concat(searchOptions)
       .concat("&partner_token=4730628431");
   } else if (searchOptions && args[0] == "-s") {
+    // Seeds player by station ID
     uri = "http://stream.dar.fm/".concat(args[1]);
     let audioStream = got.stream(uri);
     let sResource = createAudioResource(audioStream);
@@ -66,9 +69,11 @@ async function request(searchOptions, args, connection, audioPlayer) {
     audioPlayer.unpause();
     return "Playing";
   } else if (searchOptions && args[0] == "-t") {
+    // Seeds player by track name
     uri = "http://api.dar.fm/playlist.php?q="
       .concat(searchOptions)
       .concat("&partner_token=4730628431");
+    // Track play specific initializations
     let getByStationId = null;
     let title,
       artist = null;
@@ -78,7 +83,6 @@ async function request(searchOptions, args, connection, audioPlayer) {
         url: uri,
         responseType: "xml",
       }).then(async function (response) {
-        //console.log(response.data);
         let temp = JSON.parse(
           convert.xml2json(response.data, { compact: true, spaces: 2 })
         );
@@ -91,14 +95,13 @@ async function request(searchOptions, args, connection, audioPlayer) {
           title = temp.playlist.station.title._text.trim();
           artist = temp.playlist.station.artist._text.trim();
         } else return "Not found!";
-        //console.log(getByStationId);
         let audioStream = got.stream(
           "http://stream.dar.fm/".concat(getByStationId)
         );
         let tResource = createAudioResource(audioStream);
         audioPlayer.play(tResource);
         audioPlayer.unpause();
-        return "Playing";
+        return "Playing ".concat(title).concat(" by ").concat(artist);
       });
     } catch (error) {
       console.log(error);
