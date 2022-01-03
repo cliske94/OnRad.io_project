@@ -4,7 +4,7 @@ module.exports = {
 
   slash: "both",
 
-  callback: ({ message, interaction }) => {
+  callback: () => {
     let descriptions = [
       " | Can be used with the -a, -t, and -s flags\n"
         .concat("-a seeds the player with an artist name\n")

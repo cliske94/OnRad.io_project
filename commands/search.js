@@ -3,7 +3,7 @@ const convert = require("xml-js");
 
 module.exports = {
   category: "Search",
-  description: "Searches based on flags provided",
+  description: "Searches based on flags provided as arguments",
 
   maxArgs: 5,
   minArgs: 1,
@@ -18,8 +18,9 @@ module.exports = {
         searchOptions = searchOptions.concat(value).concat(" ");
       });
       searchOptions = searchOptions.substring(3);
-      //console.log(searchOptions);
       switch (args[0]) {
+        // Shows what is playing by searching for a numerical station id
+
         case "-s":
           try {
             await axios({
@@ -42,6 +43,9 @@ module.exports = {
             return returnString;
           }
           break;
+
+        // Shows station IDs playing a specific artist
+
         case "-a":
           try {
             return await axios({
@@ -50,12 +54,10 @@ module.exports = {
                 .concat(searchOptions)
                 .concat("&partner_token=1234567890"),
             }).then(function (response) {
-              //console.log(response);
               let temp = JSON.parse(
                 convert.xml2json(response.data, { compact: true, spaces: 2 })
               );
               if (temp.playlist.station) {
-                //console.log(temp.playlist.station[0].station_id._text.trim());
                 returnString = "Stations playing "
                   .concat(searchOptions)
                   .concat(":\n");
@@ -78,10 +80,13 @@ module.exports = {
             return returnString;
           }
           break;
+
+        // Track search is not implemented yet
+
         case "-t":
           break;
         default:
-          return "Please use a flag (-a, -t, -s)";
+          return "Please use a flag (-a or -s)";
       }
     } else return "This function requires arguments!";
   },

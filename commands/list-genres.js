@@ -4,7 +4,7 @@ module.exports = {
 
   slash: "both",
 
-  callback: ({ message, interaction }) => {
+  callback: () => {
     return "Rock | Country | Hip-Hop | 70s | 80s | 90s | 00s \n"
       .concat("Christmas | Alternative | Classical | Chill | Indian \n")
       .concat("Trance | Jazz | Latin | Rap | Oldies | Reggae | Soul \n")
