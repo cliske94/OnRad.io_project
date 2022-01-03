@@ -5,11 +5,18 @@ To get started running the application locally, clone this repository to an empt
 Eventually, a website will be put up for the bot to make integrating it into personal servers much easier, but, right now, the source must be ran locally. To do so, you will need a Discord 
 developer API key. This should be stored in a file you create called .env in the root directory of the application. The .env file should contain
 
-TOKEN=INSERT_API_KEY_HERE
+`TOKEN=INSERT_API_KEY_HERE`
 
-You must run npm install before running the application to install all of its dependencies.
+You must run `npm install` from the cloned directory before running the application to install all of its dependencies.
 
-Once the dependencies from the package.lock file are installed, you should be able to start the application using npm run prod or npm run dev.
+Once the dependencies from the package.lock file are installed, you should be able to start the application using
+
+`npm run prod`
+
+or
+
+`npm run dev`
+
 These scripts can be modified to your needs.
 
 The play and search commmands only support the legacy prefix, i.e. !play or !search.
