@@ -8,7 +8,6 @@ const axios = require("axios");
 const convert = require("xml-js");
 const play = require("play-dl");
 const got = require("got");
-const fs = require("fs");
 
 module.exports = {
   category: "music",
@@ -121,7 +120,6 @@ async function request(searchOptions, args, connection, audioPlayer) {
     let genre = "music";
     switch (args[0].toUpperCase()) {
       case "ROCK":
-      case "ELECTRONICDUBSTEP":
       case "COUNTRY":
       case "HIP":
       case "HIP-HOP":
@@ -170,6 +168,7 @@ async function request(searchOptions, args, connection, audioPlayer) {
         genre = "90's";
         break;
       case "2000S":
+      case "2000's":
       case "00S":
       case "00'S":
         genre = "00'S";
@@ -210,17 +209,12 @@ async function request(searchOptions, args, connection, audioPlayer) {
       let fixedURI = dataJson.songs.song[0].uberurl.url._text
         .replace("\n", "")
         .trim();
-      //console.log(fixedURI);
       let audioStream = got.stream(fixedURI);
-      //console.log(player.stream + "\nEND\n");
-      //console.log(connection + "\nEND\n");
       resource = createAudioResource(audioStream);
       audioPlayer.play(resource);
       audioPlayer.unpause();
-      //console.log(audioStream);
     });
   } catch (error) {
-    //console.log(error);
     return "Search failed!";
   } finally {
     if (!dataJson.songs || !dataJson.songs.song)
