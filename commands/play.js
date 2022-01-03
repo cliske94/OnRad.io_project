@@ -60,7 +60,7 @@ async function request(searchOptions, args, audioPlayer) {
     uri = "http://api.dar.fm/reco2.php?artist="
       .concat(searchOptions)
       .concat("&partner_token=4730628431");
-  } else if (searchOptions && args[0] == "-s") {
+  } else if (searchOptions && args[0] == "-s" && !isNaN(args[1])) {
     // Seeds player by station ID
     uri = "http://stream.dar.fm/".concat(args[1]);
     let audioStream = got.stream(uri);
@@ -68,7 +68,9 @@ async function request(searchOptions, args, audioPlayer) {
     audioPlayer.play(sResource);
     audioPlayer.unpause();
     return "Playing";
-  } else if (searchOptions && args[0] == "-t") {
+  } else if (searchOptions && args[0] == "-s")
+    return "Please use the search command and choose a valid station ID!";
+  else if (searchOptions && args[0] == "-t") {
     // Seeds player by track name
     uri = "http://api.dar.fm/playlist.php?q="
       .concat(searchOptions)
