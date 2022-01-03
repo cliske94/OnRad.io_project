@@ -28,3 +28,7 @@ You can use !list-genres or /list-genres to show a list of all available genres 
 The join and unjoin commands join or unjoin the bot to or from a current voice connection. They return a prompt stating to join a voice channel if the user is not currently connected.
 
 You can use !stop or /stop to quickly stop the current music steam. This also disconnects the bot from the voice channel.
+
+Credits:
+Michael Rober and his team for developing the OnRadio.io API
+Alexzander Flores for development of the WOKCommands package
