@@ -19,7 +19,7 @@ or
 
 These scripts can be modified to your needs.
 
-The play and search commmands only support the legacy prefix, i.e. !play or !search.
+The play and search commands only support the legacy prefix, i.e. !play or !search.
 
 You can use !list-commands or /list-commands to show a descriptive list of the application's functionality.
 
