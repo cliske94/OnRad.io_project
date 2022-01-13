@@ -1,5 +1,5 @@
-const env = require("dotenv");
-env.config();
+const dotenv = require("dotenv");
+dotenv.config();
 
 const {
   createAudioPlayer,
@@ -57,7 +57,7 @@ async function request(searchOptions, args, audioPlayer) {
   if (args.length == 0) {
     uri =
       "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=".concat(
-        env.PARTNER_TOKEN
+        process.env.PARTNER_TOKEN
       );
   }
   if (searchOptions && args[0] == "-a") {
@@ -65,7 +65,7 @@ async function request(searchOptions, args, audioPlayer) {
     uri = "http://api.dar.fm/reco2.php?artist="
       .concat(searchOptions)
       .concat("&partner_token=")
-      .concat(env.PARTNER_TOKEN);
+      .concat(process.env.PARTNER_TOKEN);
   } else if (
     searchOptions &&
     args[0] == "-s" &&
@@ -86,7 +86,7 @@ async function request(searchOptions, args, audioPlayer) {
     uri = "http://api.dar.fm/playlist.php?q="
       .concat(searchOptions)
       .concat("&partner_token=")
-      .concat(env.PARTNER_TOKEN);
+      .concat(process.env.PARTNER_TOKEN);
     // Track play specific initializations
     let getByStationId = null;
     let title,
@@ -206,11 +206,11 @@ async function request(searchOptions, args, audioPlayer) {
     uri = "http://api.dar.fm/topsongs.php?q="
       .concat(genre)
       .concat("&intl=1&page_size=5&partner_token=")
-      .concat(env.PARTNER_TOKEN);
+      .concat(process.env.PARTNER_TOKEN);
   } else if (args[0] != "-a") {
     uri =
       "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=".concat(
-        env.PARTNER_TOKEN
+        process.env.PARTNER_TOKEN
       );
   }
 
