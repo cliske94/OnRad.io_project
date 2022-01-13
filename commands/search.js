@@ -1,5 +1,7 @@
+const env = require("dotenv");
 const { default: axios } = require("axios");
 const convert = require("xml-js");
+env.config();
 
 module.exports = {
   category: "Search",
@@ -52,7 +54,8 @@ module.exports = {
               method: "get",
               url: "http://api.dar.fm/playlist.php?q="
                 .concat(searchOptions)
-                .concat("&partner_token=1234567890"),
+                .concat("&partner_token=")
+                .concat(process.env.PARTNER_TOKEN),
             }).then(function (response) {
               let temp = JSON.parse(
                 convert.xml2json(response.data, { compact: true, spaces: 2 })
