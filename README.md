@@ -3,9 +3,13 @@ OnRad.io is a search engine for online radio stations, and this is a Discord bot
 To get started running the application locally, clone this repository to an empty directory.
 
 Eventually, a website will be put up for the bot to make integrating it into personal servers much easier, but, right now, the source must be ran locally. To do so, you will need a Discord 
-developer API key. This should be stored in a file you create called .env in the root directory of the application. The .env file should contain
+developer API key. This should be stored in a file you create called .env in the root directory of the application. You will also need a partner token from dar.fm. After 
+registering with their site, you will be granted a partner token that will also be added to the .env file.
 
-`TOKEN=INSERT_API_KEY_HERE`
+The .env file should contain
+
+`TOKEN=INSERT_API_KEY_HERE
+ PARTNER_TOKEN=INSERT_DAR_PARTNER_TOKEN_HERE`
 
 You must run `npm install` from the cloned directory before running the application to install all of its dependencies.
 
