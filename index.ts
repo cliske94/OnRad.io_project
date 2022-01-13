@@ -27,3 +27,7 @@ client.on("ready", () => {
 });
 
 client.login(process.env.TOKEN);
+
+console.log("Connected to Discord")
+
+setInterval(() => {console.log("Heartbeat")}, 5000)
