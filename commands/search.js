@@ -7,7 +7,7 @@ module.exports = {
   category: "Search",
   description: "Searches based on flags provided as arguments",
 
-  maxArgs: 5,
+  maxArgs: 7,
   minArgs: 1,
 
   callback: async ({ interaction, args }) => {
