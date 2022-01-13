@@ -1,3 +1,6 @@
+const env = require("dotenv");
+env.config();
+
 const {
   createAudioPlayer,
   joinVoiceChannel,
@@ -53,13 +56,16 @@ async function request(searchOptions, args, audioPlayer) {
   let uri = null;
   if (args.length == 0) {
     uri =
-      "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=4730628431";
+      "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=".concat(
+        env.PARTNER_TOKEN
+      );
   }
   if (searchOptions && args[0] == "-a") {
     // Seeds player by artist name
     uri = "http://api.dar.fm/reco2.php?artist="
       .concat(searchOptions)
-      .concat("&partner_token=4730628431");
+      .concat("&partner_token=")
+      .concat(env.PARTNER_TOKEN);
   } else if (
     searchOptions &&
     args[0] == "-s" &&
@@ -79,7 +85,8 @@ async function request(searchOptions, args, audioPlayer) {
     // Seeds player by track name
     uri = "http://api.dar.fm/playlist.php?q="
       .concat(searchOptions)
-      .concat("&partner_token=4730628431");
+      .concat("&partner_token=")
+      .concat(env.PARTNER_TOKEN);
     // Track play specific initializations
     let getByStationId = null;
     let title,
@@ -198,10 +205,13 @@ async function request(searchOptions, args, audioPlayer) {
     }
     uri = "http://api.dar.fm/topsongs.php?q="
       .concat(genre)
-      .concat("&intl=1&page_size=5&partner_token=4730628431");
+      .concat("&intl=1&page_size=5&partner_token=")
+      .concat(env.PARTNER_TOKEN);
   } else if (args[0] != "-a") {
     uri =
-      "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=4730628431";
+      "http://api.dar.fm/topsongs.php?q=Music&intl=1&page_size=5&partner_token=".concat(
+        env.PARTNER_TOKEN
+      );
   }
 
   let dataJson = { placeholder: null };
