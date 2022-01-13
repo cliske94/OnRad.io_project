@@ -23,11 +23,11 @@ client.on("ready", () => {
   new WOKCommands(client, {
     commandDir: path.join(__dirname, "commands"),
   });
-  console.log("The bot is ready");
+  console.log("\nThe bot is ready\n");
 });
 
 client.login(process.env.TOKEN);
 
-console.log("Connected to Discord")
-
-setInterval(() => {console.log("Heartbeat")}, 5000)
+console.log("\nThe bot is connected to Discord\n")
+let baseTime = Date.now();
+setInterval(() => {console.log("Heartbeat | Uptime: ".concat("" + (((Date.now() - baseTime))/60000).toFixed(2)).concat(" minutes"))}, 5000)
