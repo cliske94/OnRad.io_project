@@ -8,7 +8,7 @@ registering with their site, you will be granted a partner token that will also 
 
 The .env file should contain
 
-`TOKEN=INSERT_API_KEY_HERE
+`TOKEN=INSERT_API_KEY_HERE\n
  PARTNER_TOKEN=INSERT_DAR_PARTNER_TOKEN_HERE`
 
 You must run `npm install` from the cloned directory before running the application to install all of its dependencies.
