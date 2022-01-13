@@ -41,7 +41,7 @@ module.exports = {
           return "Please use the ! prefix, i.e. !play";
         } else if (message) {
           const audioPlayer = createAudioPlayer();
-          const connection = joinVoiceChannel({
+          joinVoiceChannel({
             channelId: message.member.voice.channel?.id,
             guildId: message.guild?.id,
             adapterCreator: message.guild?.voiceAdapterCreator,
